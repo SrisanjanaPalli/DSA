@@ -22,6 +22,11 @@ public class Main {
         System.out.println("--Deletion--");
         ll.deleteAt(6);
         ll.show();
-
+        System.out.println("--Searching--");
+        ll.searchKey(4);
+        ll.searchKey(5);
+        System.out.println("--Reversal--");
+        ll.reverseList();
+        ll.show();
     }
 }

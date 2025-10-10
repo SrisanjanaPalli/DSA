@@ -69,4 +69,39 @@ public class Linked {
             temp.next = temp.next.next;
         }
     }
+
+    public void searchKey(int key) {
+        Node temp = head;
+        while(temp.next != null) {
+            if(temp.data == key) {
+                System.out.println("Key found!");
+                return;
+            }
+            temp = temp.next;
+        }
+        if(temp.next == null){
+            System.out.println("Key not found!");
+        }
+    }
+
+    public void reverseList() {
+        if(head.next != null) {
+            Node prev = head;
+            Node temp = head.next;
+            Node nex = temp.next;
+        
+            temp.next = prev;
+            prev.next = null;
+
+            while(nex != null) {
+                prev = temp;
+                temp = nex;
+                nex = nex.next;
+
+                temp.next = prev;
+            }
+            head = temp;
+        }
+        
+    }
 }
