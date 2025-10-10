@@ -85,23 +85,17 @@ public class Linked {
     }
 
     public void reverseList() {
-        if(head.next != null) {
-            Node prev = head;
-            Node temp = head.next;
-            Node nex = temp.next;
+            Node prev = null;
+            Node temp = head;
+            Node nex = head.next;
         
-            temp.next = prev;
-            prev.next = null;
-
-            while(nex != null) {
+            while(temp != null) {
+                nex = temp.next;
+                temp.next = prev;
                 prev = temp;
                 temp = nex;
-                nex = nex.next;
-
-                temp.next = prev;
             }
-            head = temp;
-        }
-        
+            head = prev;
+
     }
 }
