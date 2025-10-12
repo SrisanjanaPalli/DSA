@@ -1,10 +1,9 @@
 package com.pss.dsall;
 
-public class Linked {
+public class DoubleLinked {
     Node head;
 
     public void insert(int data) {
-        
         Node n = new Node();
         n.data = data;
 
@@ -16,20 +15,9 @@ public class Linked {
             temp = temp.next;
         }
         temp.next = n;
+        n.prev = temp;
         }
-        
     }
-
-    public void show() {
-        Node temp = head;
-
-        while(temp.next != null) {
-            System.out.println(temp.data);
-            temp = temp.next;
-        }
-        System.out.println(temp.data);
-    }
-
     public void insertAt(int index, int data) {
         Node n = new Node();
         n.data = data;
@@ -47,9 +35,23 @@ public class Linked {
             System.out.println("invalid index!");
         } else {
             n.next = temp.next;
+            n.prev = temp;
+            if(temp.next != null) {
+                temp.next.prev = n;
+            }
             temp.next = n;
         }
        
+    }
+
+    public void show() {
+        Node temp = head;
+
+        while(temp.next != null) {
+            System.out.println(temp.data);
+            temp = temp.next;
+        }
+        System.out.println(temp.data);
     }
 
     public void deleteAt(int index) {
@@ -58,44 +60,26 @@ public class Linked {
 
         if(index == 0) {
             head = temp.next;
+            if(head != null) {
+                head.prev = null;
+            }
+            return;
         }
         while(count < index-1 && temp.next != null) {
             count ++;
             temp = temp.next;
         }
-        if(count < index-1)
+        if(temp.next == null) {
             System.out.println("invalid index!");
-        else {
-            temp.next = temp.next.next;
-        }
-    }
-
-    public void searchKey(int key) {
-        Node temp = head;
-        while(temp.next != null) {
-            if(temp.data == key) {
-                System.out.println("Key found!");
-                return;
+        } else {
+            Node toDelete = temp.next;
+            temp.next = toDelete.next;
+            if(toDelete.next != null) {
+                toDelete.next.prev = temp;
             }
-            temp = temp.next;
-        }
-        if(temp.next == null){
-            System.out.println("Key not found!");
+            toDelete.prev = null;
+            toDelete.next = null;
         }
     }
-
-    public void reverseList() {
-            Node prev = null;
-            Node temp = head;
-            Node nex = head.next;
-        
-            while(temp != null) {
-                nex = temp.next;
-                temp.next = prev;
-                prev = temp;
-                temp = nex;
-            }
-            head = prev;
-
-    }
+            
 }
